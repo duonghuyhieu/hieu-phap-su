@@ -1,4 +1,35 @@
-@echo off
+(base) PS C:\WINDOWS\system32> git push
+fatal: not a git repository (or any of the parent directories): .git
+(base) PS C:\WINDOWS\system32> irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex
+========================================
+Phasmophobia Save Manager - Quick Run
+========================================
+
+Downloading GUI from GitHub...
+Downloading sync scripts...
+
+Download complete!
+
+Installing dependencies...
+WARNING: Failed to install dependencies!
+Upload/Download features may not work properly.
+
+Launching GUI...
+
+
+ERROR: Failed to download from GitHub!
+
+Error details: At C:\Users\Hieu PC\AppData\Local\Temp\phasmophobia-gui\phasmophobia-hacker-gui.ps1:210 char:26
++ function Show-SystemInfo {
++                          ~
+Missing closing '}' in statement block or type definition.
+
+Please check:
+  1. You have internet connection
+  2. GitHub repository URL is correct
+  3. The files exist in the repository
+
+Press Enter to exit:@echo off
 REM Phasmophobia Save Manager - GUI Launcher
 REM Double-click this file to open the graphical interface
 
