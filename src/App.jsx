@@ -10,7 +10,6 @@ function App() {
   const [uploadName, setUploadName] = useState('');
   const [uploadFile, setUploadFile] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [downloadId, setDownloadId] = useState('');
   const [downloading, setDownloading] = useState(false);
 
   // Sign in anonymously on mount
@@ -186,24 +185,6 @@ function App() {
                   Game được chia thành 2 parts. Bạn cần tải cả 2 parts và giải nén để chơi.
                 </p>
 
-                {/* Download Both Parts Button */}
-                <div className="mb-6">
-                  <button
-                    onClick={() => {
-                      window.open('https://drive.google.com/file/d/1IlFqe3V_F_HF-eoBoH5DQ68JKSkRexyg/view?usp=sharing', '_blank');
-                      window.open('https://drive.google.com/file/d/1hQBOQdSuhLoF-PXadhexDpete-oWZl7v/view?usp=sharing', '_blank');
-                    }}
-                    className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white px-8 py-5 rounded-xl transition-all transform hover:scale-105 font-bold text-xl shadow-lg hover:shadow-2xl animate-pulse"
-                  >
-                    ⬇️ Tải Game (Cả 2 Parts)
-                  </button>
-                  <p className="text-gray-400 text-sm text-center mt-2">
-                    Click để mở cả 2 links Google Drive cùng lúc
-                  </p>
-                </div>
-
-                <p className="text-gray-400 text-sm mb-3 text-center">Hoặc tải từng part riêng lẻ:</p>
-
                 <div className="space-y-4">
                   {/* Part 1 */}
                   <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
@@ -213,7 +194,7 @@ function App() {
                         <p className="text-gray-400 text-sm">Google Drive Link</p>
                       </div>
                       <a
-                        href="https://drive.google.com/file/d/1IlFqe3V_F_HF-eoBoH5DQ68JKSkRexyg/view?usp=sharing"
+                        href="https://drive.google.com/file/d/1HTVT4qtDiOTwpjMLUkbVGp_x-hpvHiil/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors text-center font-semibold"
@@ -277,18 +258,31 @@ function App() {
 
               {/* GUI Instructions */}
               <div className="bg-gradient-to-r from-purple-900 to-blue-900 border border-purple-600 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold text-white mb-4">🎨 Sử dụng GUI (Khuyến nghị)</h3>
+                <h3 className="text-xl font-semibold text-white mb-4">💻 Sử dụng Hacker GUI (Khuyến nghị)</h3>
                 <p className="text-gray-200 mb-4">
-                  Cách dễ nhất để upload và download saves là sử dụng giao diện đồ họa (GUI) trên máy tính của bạn.
+                  Cách dễ nhất để upload và download saves là sử dụng Hacker Style GUI - giao diện CLI đơn giản, chỉ cần chọn số!
                 </p>
 
                 <div className="bg-gray-900 bg-opacity-50 p-4 rounded-lg mb-4">
-                  <h4 className="text-white font-semibold mb-3">📥 Bước 1: Tải GUI về máy</h4>
+                  <h4 className="text-white font-semibold mb-3">⚡ Cách 1: Chạy Online (NHANH NHẤT)</h4>
+                  <ol className="list-decimal list-inside space-y-2 ml-4 text-gray-200">
+                    <li>Mở PowerShell trên Windows</li>
+                    <li>Copy và chạy lệnh sau:
+                      <div className="mt-2 mb-2 bg-gray-800 p-3 rounded-lg font-mono text-sm text-green-300 overflow-x-auto">
+                        irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex
+                      </div>
+                    </li>
+                    <li>GUI sẽ tự động tải và mở ngay lập tức!</li>
+                  </ol>
+                </div>
+
+                <div className="bg-gray-900 bg-opacity-50 p-4 rounded-lg mb-4">
+                  <h4 className="text-white font-semibold mb-3">📥 Cách 2: Download và chạy Local</h4>
                   <ol className="list-decimal list-inside space-y-2 ml-4 text-gray-200">
                     <li>Download repository từ GitHub:
                       <div className="mt-2 mb-2">
                         <a
-                          href="https://github.com/your-username/phasmophobia-community-hub/archive/refs/heads/main.zip"
+                          href="https://github.com/duonghuyhieu/hieu-phap-su/archive/refs/heads/main.zip"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-block bg-gray-800 hover:bg-gray-700 text-purple-300 px-4 py-2 rounded-lg transition-colors text-sm font-semibold"
@@ -299,21 +293,27 @@ function App() {
                     </li>
                     <li>Giải nén file ZIP vừa tải về</li>
                     <li>Mở thư mục đã giải nén</li>
+                    <li>Double-click file <code className="bg-gray-800 px-2 py-1 rounded">Launch-Hacker-GUI.bat</code></li>
                   </ol>
                 </div>
 
                 <div className="bg-gray-900 bg-opacity-50 p-4 rounded-lg mb-4">
-                  <h4 className="text-white font-semibold mb-3">🚀 Bước 2: Chạy GUI</h4>
-                  <ol className="list-decimal list-inside space-y-2 ml-4 text-gray-200">
-                    <li>Trong thư mục đã giải nén, tìm file <code className="bg-gray-800 px-2 py-1 rounded">Launch-GUI.bat</code></li>
-                    <li>Double-click file <code className="bg-gray-800 px-2 py-1 rounded">Launch-GUI.bat</code></li>
-                    <li>Giao diện GUI sẽ mở ra với 2 chức năng chính:
-                      <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
-                        <li><strong>Upload:</strong> Nhập tên save → Click "Upload"</li>
-                        <li><strong>Download:</strong> Nhập Save ID (copy từ danh sách bên dưới) → Click "Download"</li>
-                      </ul>
-                    </li>
-                  </ol>
+                  <h4 className="text-white font-semibold mb-3">🎮 Sử dụng GUI</h4>
+                  <p className="text-gray-200 mb-2">Giao diện kiểu Hacker với menu đơn giản:</p>
+                  <ul className="list-disc list-inside ml-6 space-y-1 text-gray-200">
+                    <li><strong>[1]</strong> Upload Save to Cloud - Upload save của bạn</li>
+                    <li><strong>[2]</strong> Download Save from Cloud - Download save từ cộng đồng</li>
+                    <li><strong>[3]</strong> Open Web Interface - Mở web để browse saves</li>
+                    <li><strong>[4]</strong> Open Save Folder - Mở thư mục save</li>
+                    <li><strong>[5]</strong> System Info - Xem thông tin hệ thống</li>
+                    <li><strong>[0]</strong> Exit - Thoát</li>
+                  </ul>
+                </div>
+
+                <div className="bg-green-900 bg-opacity-50 border border-green-600 p-3 rounded-lg mb-4">
+                  <p className="text-green-200 text-sm">
+                    <strong>✨ Đặc điểm:</strong> Giao diện màu xanh Matrix, ASCII art đẹp mắt, chỉ dùng bàn phím, không cần chuột!
+                  </p>
                 </div>
 
                 <div className="bg-yellow-900 bg-opacity-50 border border-yellow-600 p-3 rounded-lg mb-4">
@@ -324,14 +324,14 @@ function App() {
 
                 <div className="bg-blue-900 bg-opacity-50 border border-blue-600 p-3 rounded-lg mb-4">
                   <p className="text-blue-200 text-sm">
-                    <strong>ℹ️ Lưu ý:</strong> Bạn cần cài đặt Node.js trên máy để GUI hoạt động.
+                    <strong>ℹ️ Lưu ý:</strong> Bạn cần cài đặt Node.js trên máy để upload/download hoạt động.
                     Tải Node.js tại <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-100">nodejs.org</a>
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href="https://github.com/your-username/phasmophobia-community-hub/archive/refs/heads/main.zip"
+                    href="https://github.com/duonghuyhieu/hieu-phap-su/archive/refs/heads/main.zip"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
@@ -339,7 +339,7 @@ function App() {
                     📥 Download GUI Tool
                   </a>
                   <a
-                    href="https://github.com/your-username/phasmophobia-community-hub"
+                    href="https://github.com/duonghuyhieu/hieu-phap-su"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors font-semibold"
