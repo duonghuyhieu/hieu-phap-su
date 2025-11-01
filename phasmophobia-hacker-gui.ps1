@@ -117,8 +117,7 @@ function Invoke-Upload {
     # Run upload script
     $scriptPath = Join-Path $PSScriptRoot "scripts\sync-up.bat"
     if (Test-Path -LiteralPath $scriptPath) {
-        $env:SAVE_NAME = $saveName
-        & "$scriptPath"
+        & "$scriptPath" "$saveName"
         Show-Success "Upload completed!"
     } else {
         Show-Error "Upload script not found!"
@@ -166,8 +165,7 @@ function Invoke-Download {
     # Run download script
     $scriptPath = Join-Path $PSScriptRoot "scripts\sync-down.bat"
     if (Test-Path -LiteralPath $scriptPath) {
-        $env:SAVE_ID = $saveId
-        & "$scriptPath"
+        & "$scriptPath" "$saveId"
         Show-Success "Download completed!"
     } else {
         Show-Error "Download script not found!"
