@@ -6,18 +6,24 @@ Trung tâm cộng đồng Phasmophobia - Tải game và quản lý save game.
 
 ## 🚀 CÁCH SỬ DỤNG
 
-### ⚡ NHANH NHẤT: Chạy GUI Online (Không cần download)
+### ⚡ NHANH NHẤT: Chạy Hacker GUI Online (Không cần download)
 
 **Mở PowerShell và chạy lệnh sau:**
 ```powershell
-irm https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/quick-run.ps1 | iex
+irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex
 ```
+
+**Giao diện kiểu Hacker:**
+- ✅ Menu đơn giản, chỉ cần chọn số
+- ✅ Màu xanh lá Matrix style
+- ✅ ASCII art banner
+- ✅ Không cần chuột, chỉ dùng bàn phím
 
 **Hoặc tạo shortcut 1-click:**
 1. Tạo file `Launch-GUI.bat` với nội dung:
 ```batch
 @echo off
-powershell -Command "irm https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/quick-run.ps1 | iex"
+powershell -Command "irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex"
 pause
 ```
 2. Double-click để chạy GUI

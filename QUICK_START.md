@@ -4,10 +4,8 @@
 
 ### Mở PowerShell và chạy:
 ```powershell
-irm https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/quick-run.ps1 | iex
+irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex
 ```
-
-**Thay `YOUR_USERNAME/YOUR_REPO_NAME` bằng thông tin GitHub thực tế của bạn**
 
 ---
 
@@ -16,7 +14,7 @@ irm https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/quick-ru
 ### Bước 1: Tạo file `Launch-GUI.bat`
 ```batch
 @echo off
-powershell -Command "irm https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/quick-run.ps1 | iex"
+powershell -Command "irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex"
 pause
 ```
 

@@ -14,13 +14,13 @@ if (-not (Test-Path $tempDir)) {
 
 Write-Host "Downloading GUI from GitHub..." -ForegroundColor Yellow
 
-# GitHub repository URL (UPDATE THIS!)
-$repoUrl = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main"
+# GitHub repository URL
+$repoUrl = "https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main"
 
 try {
-    # Download GUI script
-    $guiPath = Join-Path $tempDir "phasmophobia-sync-gui.ps1"
-    Invoke-WebRequest -Uri "$repoUrl/phasmophobia-sync-gui.ps1" -OutFile $guiPath -ErrorAction Stop
+    # Download Hacker Style GUI script
+    $guiPath = Join-Path $tempDir "phasmophobia-hacker-gui.ps1"
+    Invoke-WebRequest -Uri "$repoUrl/phasmophobia-hacker-gui.ps1" -OutFile $guiPath -ErrorAction Stop
     
     # Download scripts folder
     $scriptsDir = Join-Path $tempDir "scripts"

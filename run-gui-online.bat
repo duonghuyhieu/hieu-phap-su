@@ -24,7 +24,7 @@ set TEMP_DIR=%TEMP%\phasmophobia-gui
 if not exist "%TEMP_DIR%" mkdir "%TEMP_DIR%"
 
 REM Download the PowerShell GUI script from GitHub
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/phasmophobia-sync-gui.ps1' -OutFile '%TEMP_DIR%\phasmophobia-sync-gui.ps1' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/phasmophobia-sync-gui.ps1' -OutFile '%TEMP_DIR%\phasmophobia-sync-gui.ps1' }"
 
 if %ERRORLEVEL% NEQ 0 (
     echo.
@@ -43,11 +43,11 @@ REM Download the batch scripts
 echo Downloading sync scripts...
 if not exist "%TEMP_DIR%\scripts" mkdir "%TEMP_DIR%\scripts"
 
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/scripts/sync-up.bat' -OutFile '%TEMP_DIR%\scripts\sync-up.bat' }"
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/scripts/sync-down.bat' -OutFile '%TEMP_DIR%\scripts\sync-down.bat' }"
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/scripts/sync.js' -OutFile '%TEMP_DIR%\scripts\sync.js' }"
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/scripts/config.js' -OutFile '%TEMP_DIR%\scripts\config.js' }"
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO_NAME/main/scripts/package.json' -OutFile '%TEMP_DIR%\scripts\package.json' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/scripts/sync-up.bat' -OutFile '%TEMP_DIR%\scripts\sync-up.bat' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/scripts/sync-down.bat' -OutFile '%TEMP_DIR%\scripts\sync-down.bat' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/scripts/sync.js' -OutFile '%TEMP_DIR%\scripts\sync.js' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/scripts/config.js' -OutFile '%TEMP_DIR%\scripts\config.js' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/scripts/package.json' -OutFile '%TEMP_DIR%\scripts\package.json' }"
 
 echo.
 echo Download complete!
