@@ -1,4 +1,4 @@
-# Phasmophobia Save Manager - Hacker Style
+﻿# Phasmophobia Save Manager - Hacker Style
 # Simple menu-based CLI interface
 
 # Set console colors
