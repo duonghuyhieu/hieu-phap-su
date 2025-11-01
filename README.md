@@ -1,127 +1,55 @@
-# 👻 Phasmophobia Community Hub
+# 👻 Phasmophobia Save Manager
 
-Trung tâm cộng đồng Phasmophobia - Tải game và quản lý save game.
+A simple, text-based save game management system for Phasmophobia using Firebase Firestore.
 
----
+## 🎯 Features
 
-## 🚀 CÁCH SỬ DỤNG
-
-### ⚡ NHANH NHẤT: Chạy Hacker GUI Online (Không cần download)
-
-**Mở PowerShell và chạy lệnh sau:**
-```powershell
-irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex
-```
-
-**Giao diện kiểu Hacker:**
-- ✅ Menu đơn giản, chỉ cần chọn số
-- ✅ Màu xanh lá Matrix style
-- ✅ ASCII art banner
-- ✅ Không cần chuột, chỉ dùng bàn phím
-
-**Hoặc tạo shortcut 1-click:**
-1. Tạo file `Launch-GUI.bat` với nội dung:
-```batch
-@echo off
-powershell -Command "irm https://raw.githubusercontent.com/duonghuyhieu/hieu-phap-su/main/quick-run.ps1 | iex"
-pause
-```
-2. Double-click để chạy GUI
-
-📖 **Xem hướng dẫn chi tiết:** [ONLINE_GUI_GUIDE.md](ONLINE_GUI_GUIDE.md)
-
----
-
-### 📦 Hoặc: Download và chạy local
-
-#### 1. Khởi động Web Application
-```bash
-npm install
-npm run dev
-```
-Mở browser tại `http://localhost:3000`
-
-#### 2. Tải Game
-- Vào tab "🎮 Tải Game"
-- Download Part 1 và Part 2 từ Google Drive
-- Làm theo hướng dẫn cài đặt
-
-#### 3. Quản lý Save Game
-- Vào tab "💾 Quản lý Save Game"
-- Sử dụng GUI để upload/download saves
-- Hoặc xem danh sách saves từ cộng đồng
-
----
-
-## 🌟 Features
-
-- **🎮 Game Download**: Direct links to download Phasmophobia game files
-- **🎨 GUI Interface**: Beautiful Windows GUI for save management
-- **🌐 Web Interface**: Browse and download saves from the community
-- **☁️ Cloud Storage**: Saves stored in Firebase Firestore
-- **🔄 Real-time Updates**: See new saves as they're uploaded
-- **👥 Public Sharing**: No login required, completely anonymous
-- **💾 Automatic Backups**: Your saves are backed up before downloading (via GUI)
+- **Create Save**: Upload text files or type content directly
+- **List Saves**: View all saved games with details
+- **Download Save**: Download saves as `.txt` files
+- **Edit Save**: Update save name or content
+- **Delete Save**: Remove unwanted saves
+- **Simple & Clean**: No complex compression, just plain text files
+- **Firebase Powered**: Cloud storage with real-time updates
 
 ## 📋 Table of Contents
 
-- [System Architecture](#system-architecture)
 - [Quick Start](#quick-start)
 - [Firebase Setup](#firebase-setup)
-- [Web Application](#web-application)
-- [GUI Usage](#gui-usage)
+- [Usage](#usage)
+- [Development](#development)
+- [Deployment](#deployment)
 - [Troubleshooting](#troubleshooting)
-
-## 🏗️ System Architecture
-
-The system consists of three main components:
-
-### 1. Web Application
-- **Technology**: React + Vite + Tailwind CSS
-- **Features**: 2-tab interface (Game Download, Save Management)
-- **Authentication**: Firebase Anonymous Auth
-- **Purpose**: Central hub for downloading game and browsing saves
-
-### 2. Database
-- **Service**: Google Firestore
-- **Access**: Public read/write
-- **Storage**: Base64-encoded ZIP archives
-
-### 3. GUI Application
-- **Technology**: PowerShell + Windows Forms
-- **Features**: Upload and download saves with GUI
-- **Wrapper**: Batch file launcher (Launch-GUI.bat)
-- **Purpose**: Easy save management without command line
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js v18 or higher ([Download](https://nodejs.org))
-- A Firebase project ([Create one](https://console.firebase.google.com))
+- Node.js (v16 or higher) - [Download](https://nodejs.org)
+- npm or yarn
+- Firebase account - [Create one](https://console.firebase.google.com)
 
 ### Installation
 
-1. **Clone or download this repository**
+1. Clone the repository:
+```bash
+git clone https://github.com/duonghuyhieu/hieu-phap-su.git
+cd hieu-phap-su
+```
 
-2. **Install web app dependencies**:
-   ```bash
-   npm install
-   ```
+2. Install dependencies:
+```bash
+npm install
+```
 
-3. **Install script dependencies**:
-   ```bash
-   cd scripts
-   npm install
-   cd ..
-   ```
+3. Configure Firebase (see [Firebase Setup](#firebase-setup))
 
-4. **Configure Firebase** (see [Firebase Setup](#firebase-setup))
+4. Start the development server:
+```bash
+npm run dev
+```
 
-5. **Run the web app**:
-   ```bash
-   npm run dev
-   ```
+5. Open your browser and navigate to `http://localhost:3000`
 
 ## 🔥 Firebase Setup
 
@@ -157,7 +85,7 @@ In Firestore Database, go to **Rules** tab and paste:
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /shared_saves/{document=**} {
+    match /saves/{document=**} {
       allow read, write: if request.auth != null;
     }
   }
@@ -165,6 +93,8 @@ service cloud.firestore {
 ```
 
 Click "Publish"
+
+⚠️ **Note**: These rules allow any authenticated user (including anonymous) to read/write. For production, implement proper authentication.
 
 ### Step 5: Get Firebase Configuration
 
@@ -174,9 +104,10 @@ Click "Publish"
 4. Register app (nickname: "Phasmophobia Save Manager")
 5. Copy the `firebaseConfig` object
 
-### Step 6: Update Configuration Files
+### Step 6: Update Configuration
 
-**For Web App** - Edit `src/firebase.js`:
+Edit `src/firebase.js` and replace the `firebaseConfig` object with your credentials:
+
 ```javascript
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
@@ -189,170 +120,136 @@ const firebaseConfig = {
 };
 ```
 
-**For GUI Scripts** - Edit `scripts/config.js`:
-```javascript
-export const FIREBASE_CONFIG = {
-  projectId: "YOUR_PROJECT_ID",
-  apiKey: "YOUR_API_KEY"
-};
+## 📝 Usage
 
-export const SAVE_DIR = 'C:\\Users\\YourUsername\\AppData\\LocalLow\\Kinetic Games\\Phasmophobia';
+### Creating a Save
+
+1. Click on the **"Create Save"** tab
+2. Enter a name for your save
+3. Either:
+   - Upload a `.txt` file, OR
+   - Type/paste content directly into the text area
+4. Click **"Create Save"**
+
+### Listing Saves
+
+1. Click on the **"List Saves"** tab
+2. View all saves with:
+   - Save name
+   - Save ID
+   - Creation and update timestamps
+   - Content preview (click "View Content")
+3. Actions available:
+   - **Copy ID**: Copy save ID to clipboard
+   - **Edit**: Update save name or content
+   - **Delete**: Remove the save
+
+### Downloading a Save
+
+1. Click on the **"Download Save"** tab
+2. Enter the Save ID (copy from List Saves tab)
+3. Click **"Download as .txt"**
+4. The save will be downloaded as a text file
+
+## 🛠️ Development
+
+### Project Structure
+
+```
+hieu-phap-su/
+├── src/
+│   ├── App.jsx          # Main React component
+│   ├── firebase.js      # Firebase configuration and CRUD functions
+│   ├── main.jsx         # React entry point
+│   └── index.css        # Tailwind CSS styles
+├── public/              # Static assets
+├── package.json         # Dependencies
+└── vite.config.js       # Vite configuration
 ```
 
-**Note**: Current configuration is already set up. You only need to update if using your own Firebase project.
+### Available Scripts
 
-## 🌐 Web Application
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
 
-### Running the Web App
+### Firebase Functions
 
+The following functions are available in `src/firebase.js`:
+
+- `createSave(saveName, saveContent)` - Create a new save
+- `getSave(saveId)` - Get a save by ID
+- `getAllSaves()` - Get all saves
+- `updateSave(saveId, saveName, saveContent)` - Update a save
+- `deleteSave(saveId)` - Delete a save
+
+## 🎨 Tech Stack
+
+- **Frontend**: React + Vite
+- **Styling**: Tailwind CSS
+- **Database**: Firebase Firestore
+- **Authentication**: Firebase Anonymous Auth
+
+## 📦 Deployment
+
+### Deploy to Firebase Hosting
+
+1. Install Firebase CLI:
 ```bash
-npm run dev
+npm install -g firebase-tools
 ```
 
-The app will open at `http://localhost:3000`
+2. Login to Firebase:
+```bash
+firebase login
+```
 
-### Building for Production
+3. Initialize Firebase:
+```bash
+firebase init
+```
 
+4. Build the project:
 ```bash
 npm run build
 ```
 
-Deploy the `dist` folder to any static hosting service (Firebase Hosting, Netlify, Vercel, etc.)
-
-### Using the Web Interface
-
-#### 🎮 Tải Game Tab
-- **Quick Download**: One-click button to open both Google Drive links at once
-- **Individual Downloads**: Separate links for Part 1 & Part 2
-- **Installation Instructions**: Step-by-step guide
-- **Tips and Warnings**: Important notes for installation
-
-#### 💾 Quản lý Save Game Tab
-- **GUI Download**: Download the GUI tool from GitHub
-- **Step-by-step Guide**: How to set up and use the GUI on your local machine
-- **Save Location**: Find your Phasmophobia save directory
-- **Browse Saves**: View all saves uploaded by the community
-- **Download**: Download saves as ZIP files or copy ID for GUI
-
-## 🎨 GUI Usage
-
-The easiest way to manage saves is using the GUI application.
-
-### Launching the GUI
-
-Simply double-click:
-```
-Launch-GUI.bat
-```
-
-### Features
-
-- **Upload Save**: Enter a name and click Upload button
-- **Download Save**: Enter Save ID and click Download button
-- **Open Save Folder**: Quick access to Phasmophobia save directory
-- **Help**: Built-in help and tips
-
-### How to Upload
-
-1. Launch GUI (`Launch-GUI.bat`)
-2. Enter a descriptive name for your save
-3. Click "🚀 Upload" button
-4. Wait for completion
-5. Copy the Save ID to share with others
-
-### How to Download
-
-1. Get a Save ID from:
-   - Web interface (browse community saves)
-   - Friends sharing their saves
-2. Launch GUI (`Launch-GUI.bat`)
-3. Enter the Save ID
-4. Click "⬇️ Download" button
-5. Your old save will be automatically backed up
-6. Launch Phasmophobia and enjoy!
-
-## ⚙️ Advanced: Command Line Scripts
-
-For advanced users who want automation or scripting capabilities.
-
-### Setup
-
-1. Navigate to scripts folder:
-   ```bash
-   cd scripts
-   npm install
-   ```
-
-2. Configure Firebase credentials in `config.js`
-
-### Usage
-
-#### Upload via Command Line
-
+5. Deploy:
 ```bash
-scripts\sync-up.bat "Save Name"
+firebase deploy
 ```
 
-#### Download via Command Line
+### Deploy to Vercel
 
+1. Install Vercel CLI:
 ```bash
-scripts\sync-down.bat [SAVE_ID]
+npm install -g vercel
 ```
 
-Example:
+2. Deploy:
 ```bash
-scripts\sync-down.bat abc123xyz456
+vercel
 ```
-
-**What it does**:
-1. Downloads save from Firestore
-2. Backs up your current save
-3. Extracts downloaded save to game directory
-4. Ready to play!
-
-### Save Location
-
-Default location:
-```
-C:\Users\[YourUsername]\AppData\LocalLow\Kinetic Games\Phasmophobia
-```
-
-To change this, edit `SAVE_DIR` in `scripts/config.js`
-
-**Quick access**: Press Win + R, paste this and hit Enter:
-```
-%APPDATA%\..\LocalLow\Kinetic Games\Phasmophobia
-```
-
-## 🔒 Security Rules
-
-The Firestore security rules allow any authenticated user (including anonymous) to read and write saves. This is intentional for public sharing.
-
-**Important Notes**:
-- Anyone can upload/download saves
-- No user data is stored
-- Saves are public and accessible to all
-- Consider file size limits (Firestore: 1MB per document)
 
 ## 📊 Data Structure
 
 ### Firestore Document Schema
 
-Collection: `shared_saves`
+Collection: `saves`
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | User-defined save name |
-| `content` | string | Base64-encoded ZIP file |
-| `timestamp` | timestamp | Upload time |
-| `uploaded_by` | string | Source ('Web UI' or 'Script') |
+| `saveName` | string | User-provided name for the save |
+| `saveContent` | string | The text content of the save file |
+| `createdAt` | timestamp | Creation timestamp |
+| `updatedAt` | timestamp | Last update timestamp |
 
 ## 🐛 Troubleshooting
 
-### Web App Issues
+### Common Issues
 
 **Problem**: "Firebase not configured"
-- **Solution**: Make sure you've updated `src/firebase.js` with your Firebase credentials
+- **Solution**: Update `src/firebase.js` with your Firebase credentials
 
 **Problem**: "Permission denied"
 - **Solution**: Check Firestore security rules allow anonymous authentication
@@ -360,70 +257,37 @@ Collection: `shared_saves`
 **Problem**: Saves not appearing
 - **Solution**: Check browser console for errors, verify Firestore connection
 
-**Problem**: Game download links not working
-- **Solution**: Links are Google Drive links - make sure you're logged into Google and have access
+**Problem**: Can't create save
+- **Solution**: Make sure both name and content are provided
 
-### GUI Issues
+**Problem**: Download not working
+- **Solution**: Verify the Save ID is correct (copy from List Saves tab)
 
-**Problem**: GUI won't open
-- **Solution**: Use `Launch-GUI.bat` instead of running the .ps1 file directly
+## 🔒 Security Notes
 
-**Problem**: Upload/Download not working
-- **Solution**:
-  1. Check Node.js is installed (`node --version`)
-  2. Run `cd scripts && npm install`
-  3. Verify Firebase config in `scripts/config.js`
-
-**Problem**: Save directory not found
-- **Solution**: Make sure you've played Phasmophobia at least once to create the save directory
-
-### Script Issues
-
-**Problem**: "Save directory not found"
-- **Solution**: Verify the path in `scripts/config.js` matches your Phasmophobia installation
-
-**Problem**: "Firestore API error"
-- **Solution**: Check `scripts/config.js` has correct Firebase credentials
-
-**Problem**: "node: command not found"
-- **Solution**: Install Node.js from [nodejs.org](https://nodejs.org)
-
-### General Issues
-
-**Problem**: Upload fails with large saves
-- **Solution**: Firestore has a 1MB document limit. Consider compressing more aggressively or splitting saves
-
-**Problem**: Download overwrites my save
-- **Solution**: Backups are created automatically. Look for folders named `Phasmophobia_backup_[timestamp]`
-
-## 📝 File Size Considerations
-
-Firestore has a **1MB limit per document**. If your save exceeds this:
-
-1. The script will show an error
-2. Consider cleaning up unnecessary files in your save directory
-3. For very large saves, you may need to use Firebase Storage instead (requires code modification)
+- The current implementation uses Firebase Anonymous Authentication
+- For production use, implement proper user authentication
+- Update Firestore security rules to restrict access
+- Never commit Firebase credentials to version control
+- Use environment variables for sensitive configuration
 
 ## 🤝 Contributing
 
-This is a community project! Feel free to:
-- Report bugs
-- Suggest features
-- Submit pull requests
-- Share your saves
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## ⚠️ Disclaimer
+## 📄 License
 
-- **Backup your saves**: Always keep backups of your original saves
-- **Use at your own risk**: Downloaded saves may not work with your game version
-- **No warranty**: This tool is provided as-is
-- **Not affiliated**: This project is not affiliated with Kinetic Games or Phasmophobia
+This project is open source and available under the MIT License.
 
-## 📜 License
+## 🙏 Acknowledgments
 
-MIT License - Feel free to use, modify, and distribute
+- Built for the Phasmophobia community
+- Powered by Firebase and React
 
-## 🎮 Happy Ghost Hunting!
+## 📞 Support
+
+If you encounter any issues or have questions, please open an issue on GitHub.
+
+---
 
 Made with 💜 for the Phasmophobia community
-
