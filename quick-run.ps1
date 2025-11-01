@@ -51,10 +51,16 @@ try {
     
     if ($nodeInstalled) {
         Write-Host "Installing dependencies..." -ForegroundColor Yellow
-        Push-Location $scriptsDir
-        npm install --silent
-        Pop-Location
-        Write-Host "Dependencies installed!" -ForegroundColor Green
+        try {
+            Push-Location -LiteralPath $scriptsDir
+            npm install --silent 2>&1 | Out-Null
+            Pop-Location
+            Write-Host "Dependencies installed!" -ForegroundColor Green
+        } catch {
+            Pop-Location
+            Write-Host "WARNING: Failed to install dependencies!" -ForegroundColor Yellow
+            Write-Host "Upload/Download features may not work properly." -ForegroundColor Yellow
+        }
     } else {
         Write-Host "WARNING: Node.js not found!" -ForegroundColor Red
         Write-Host "Upload/Download features may not work." -ForegroundColor Yellow
@@ -66,7 +72,7 @@ try {
     Write-Host ""
     
     # Launch GUI
-    & $guiPath
+    & "$guiPath"
     
     Write-Host ""
     Write-Host "GUI closed." -ForegroundColor Cyan

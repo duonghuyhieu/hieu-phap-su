@@ -116,9 +116,9 @@ function Invoke-Upload {
     
     # Run upload script
     $scriptPath = Join-Path $PSScriptRoot "scripts\sync-up.bat"
-    if (Test-Path $scriptPath) {
+    if (Test-Path -LiteralPath $scriptPath) {
         $env:SAVE_NAME = $saveName
-        & $scriptPath
+        & "$scriptPath"
         Show-Success "Upload completed!"
     } else {
         Show-Error "Upload script not found!"
@@ -165,9 +165,9 @@ function Invoke-Download {
     
     # Run download script
     $scriptPath = Join-Path $PSScriptRoot "scripts\sync-down.bat"
-    if (Test-Path $scriptPath) {
+    if (Test-Path -LiteralPath $scriptPath) {
         $env:SAVE_ID = $saveId
-        & $scriptPath
+        & "$scriptPath"
         Show-Success "Download completed!"
     } else {
         Show-Error "Download script not found!"
@@ -194,10 +194,10 @@ function Open-SaveFolder {
     Clear-Host
     Show-Banner
     $savePath = "$env:APPDATA\..\LocalLow\Kinetic Games\Phasmophobia"
-    
-    if (Test-Path $savePath) {
+
+    if (Test-Path -LiteralPath $savePath) {
         Show-Loading "Opening save folder..."
-        Start-Process "explorer.exe" -ArgumentList $savePath
+        Start-Process "explorer.exe" -ArgumentList "`"$savePath`""
         Show-Success "Save folder opened"
     } else {
         Show-Error "Save folder not found!"
@@ -226,7 +226,7 @@ function Show-SystemInfo {
     
     # Check save folder
     $savePath = "$env:APPDATA\..\LocalLow\Kinetic Games\Phasmophobia"
-    if (Test-Path $savePath) {
+    if (Test-Path -LiteralPath $savePath) {
         Show-Success "Save folder: Found"
         Show-Info "Location: $savePath"
     } else {
@@ -235,7 +235,7 @@ function Show-SystemInfo {
     
     # Check scripts
     $scriptsPath = Join-Path $PSScriptRoot "scripts"
-    if (Test-Path $scriptsPath) {
+    if (Test-Path -LiteralPath $scriptsPath) {
         Show-Success "Scripts: Found"
     } else {
         Show-Error "Scripts: Not found"
